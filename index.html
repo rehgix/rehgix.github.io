@@ -7,8 +7,8 @@
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Regix Studio · Apps de Sergi Olivares</title>
-<meta name="description" content="Regix Studio es el estudio de Sergi Olivares, docente y desarrollador de apps en Mataró. Apps sencillas, útiles y respetuosas con tus datos, como FullGrader.">
-<meta name="theme-color" content="#fffffe">
+<meta name="description" content="Regix Studio es el estudio de Sergi Olivares, docente y desarrollador de apps en Mataró. Apps sencillas, útiles y respetuosas con tus datos, como FullGrader e IPO Emprèn.">
+<meta name="theme-color" content="#fffefb">
 <link rel="canonical" href="https://rehgix.github.io/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Regix Studio">
@@ -27,17 +27,19 @@
 
   :root {
     color-scheme: light;
-    --bg: #fffffe;
-    --ink: #1e1b4b;
-    --muted: #57534e;
-    --soft: #6b6880;
-    --line: #ddd6fe;
-    --wash: #f5f3ff;
-    --wash2: #ede9fe;
-    --lila: #5b54e8;
-    --deep: #3730a3;
-    --violet: #8b5cf6;
-    --pale: #c4b5fd;
+    --bg: #fffefb;
+    --ink: #10302e;
+    --muted: #4a5957;
+    --soft: #5f6e6c;
+    --line: #c9e4df;
+    --wash: #f1f8f6;
+    --wash2: #e2f1ed;
+    --main: #0f766e;
+    --deep: #115e59;
+    --pale: #8fd0c6;
+    --accent: #c2410c;
+    --accent-wash: #fff4e6;
+    --accent-line: #fcd9b6;
   }
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
@@ -46,7 +48,7 @@
     font: 400 17px/1.6 "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
     min-height: 100vh; display: flex; flex-direction: column;
   }
-  a { color: var(--lila); text-underline-offset: 3px; }
+  a { color: var(--main); text-underline-offset: 3px; }
   a:hover { color: var(--deep); }
   .wrap { width: 100%; max-width: 1040px; margin: 0 auto; padding: 0 24px; }
 
@@ -60,17 +62,17 @@
     font: 600 13px/1 "Geist", sans-serif; color: var(--soft); background: none;
     border: 1px solid transparent; border-radius: 999px; padding: 8px 11px; cursor: pointer;
   }
-  .langs button:hover { color: var(--lila); }
-  .langs button[aria-pressed="true"] { color: var(--lila); border-color: var(--line); background: var(--wash); }
+  .langs button:hover { color: var(--main); }
+  .langs button[aria-pressed="true"] { color: var(--main); border-color: var(--line); background: var(--wash); }
 
   /* Cabecera */
   .hero { padding: 72px 0 56px; }
-  .eyebrow { display: inline-block; font: 600 13px/1 "Geist", sans-serif; letter-spacing: .08em; text-transform: uppercase; color: var(--lila); background: var(--wash); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; }
+  .eyebrow { display: inline-block; font: 600 13px/1 "Geist", sans-serif; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); background: var(--accent-wash); border: 1px solid var(--accent-line); border-radius: 999px; padding: 8px 14px; }
   h1 {
     font: 800 clamp(34px, 6.4vw, 66px)/1.05 "Unbounded", sans-serif; letter-spacing: -0.03em;
     margin: 22px 0 20px; max-width: 15ch;
   }
-  h1 em { font-style: normal; color: var(--lila); }
+  h1 em { font-style: normal; color: var(--accent); }
   .lead { font-size: clamp(17px, 2vw, 20px); color: var(--muted); max-width: 46ch; margin: 0; }
 
   /* Apps */
@@ -82,7 +84,7 @@
     display: flex; flex-direction: column; gap: 14px;
     transition: transform .25s ease, border-color .25s ease, background .25s ease;
   }
-  .card.live:hover { transform: translateY(-4px); border-color: var(--pale); background: #fdfcff; }
+  .card.live:hover { transform: translateY(-4px); border-color: var(--pale); background: #fbfefd; }
   .card .head { display: flex; align-items: center; gap: 14px; }
   .card .icon { width: 64px; height: 64px; border-radius: 16px; flex: none; }
   .card h3 { font: 700 20px/1.2 "Unbounded", sans-serif; margin: 0; letter-spacing: -0.01em; }
@@ -96,18 +98,20 @@
     border: 1px solid var(--line); color: var(--deep); background: var(--wash);
   }
   .btn:hover { border-color: var(--pale); color: var(--deep); background: var(--wash2); }
-  .btn.main { background: var(--lila); border-color: var(--lila); color: #fff; }
+  .btn.main { background: var(--main); border-color: var(--main); color: #fff; }
   .btn.main:hover { background: var(--deep); border-color: var(--deep); color: #fff; }
   .card.soon { border-style: dashed; background: var(--wash); justify-content: center; }
+  .card .icon.letter { background: var(--accent-wash); border: 1px solid var(--accent-line); display: grid; place-items: center; color: var(--accent); font: 800 22px/1 "Unbounded", sans-serif; letter-spacing: -0.02em; }
+  .tag.web { color: var(--deep); background: var(--wash); border-color: var(--line); }
   .card.soon .icon { background: var(--bg); border: 1px dashed var(--pale); display: grid; place-items: center; color: var(--pale); font: 700 28px/1 "Unbounded", sans-serif; }
 
   /* Sobre mí */
   .about { padding: 0 0 72px; }
   .about .box { border: 1px solid var(--line); border-radius: 22px; padding: 28px; background: var(--wash); display: grid; gap: 22px; grid-template-columns: 1.4fr 1fr; }
   .about p { margin: 0 0 12px; color: var(--muted); }
-  .about ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  .about ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; align-content: start; }
   .about li { display: flex; gap: 10px; align-items: baseline; }
-  .about li b { color: var(--lila); }
+  .about li b { color: var(--main); }
   @media (max-width: 720px) { .about .box { grid-template-columns: 1fr; } }
 
   footer { margin-top: auto; border-top: 1px solid var(--wash2); color: var(--soft); font-size: 14px; }
@@ -168,6 +172,20 @@
           </div>
         </article>
 
+        <article class="card live rise d4">
+          <div class="head">
+            <div class="icon letter" aria-hidden="true">IPO</div>
+            <div>
+              <h3>IPO Emprèn</h3>
+              <span class="tag web" data-i18n="tagWeb">Web · Para el aula</span>
+            </div>
+          </div>
+          <p data-i18n="ipoText">Web para las clases de IPO y emprendimiento: el alumnado lee un documento con tiempo limitado y después responde un test.</p>
+          <div class="links">
+            <a class="btn main" href="https://ipo-empren.web.app/" rel="noopener" data-i18n="ipoOpen">Abrir la web</a>
+          </div>
+        </article>
+
         <article class="card soon rise d4">
           <div class="head">
             <div class="icon" aria-hidden="true">+</div>
@@ -219,6 +237,9 @@
       tagAndroid: "Android · Google Play",
       fgText: "Corrige exámenes tipo test con la cámara del móvil. Imprime la hoja de respuestas, haz una foto y tienes la nota al instante. Los datos del alumnado nunca salen del móvil.",
       fgWeb: "Ver la web",
+      tagWeb: "Web · Para el aula",
+      ipoText: "Web para las clases de IPO y emprendimiento: el alumnado lee un documento con tiempo limitado y después responde un test.",
+      ipoOpen: "Abrir la web",
       soonTitle: "Más apps",
       soonTag: "Próximamente",
       soonText: "Estoy preparando nuevas apps pequeñas y útiles. Aparecerán aquí en cuanto estén listas.",
@@ -239,6 +260,9 @@
       tagAndroid: "Android · Google Play",
       fgText: "Corregeix exàmens tipus test amb la càmera del mòbil. Imprimeix el full de respostes, fes-hi una foto i tens la nota a l'instant. Les dades de l'alumnat no surten mai del mòbil.",
       fgWeb: "Veure la web",
+      tagWeb: "Web · Per a l'aula",
+      ipoText: "Web per a les classes d'IPO i emprenedoria: l'alumnat llegeix un document amb temps limitat i després respon un test.",
+      ipoOpen: "Obrir la web",
       soonTitle: "Més apps",
       soonTag: "Properament",
       soonText: "Estic preparant noves apps petites i útils. Apareixeran aquí tan bon punt estiguin llestes.",
@@ -259,6 +283,9 @@
       tagAndroid: "Android · Google Play",
       fgText: "Grade multiple-choice tests with your phone camera. Print the answer sheet, take a photo and get the grade instantly. Student data never leaves the phone.",
       fgWeb: "Visit the website",
+      tagWeb: "Web · For the classroom",
+      ipoText: "A website for career guidance and entrepreneurship classes: students read a document against the clock and then take a quiz.",
+      ipoOpen: "Open the website",
       soonTitle: "More apps",
       soonTag: "Coming soon",
       soonText: "I'm working on new small, useful apps. They'll appear here as soon as they're ready.",
