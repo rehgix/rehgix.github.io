@@ -1,21 +1,307 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
 <meta name="google-site-verification" content="2IF2tc4lpiZpyHavqlvCVm6vh7wjcTjzBhodV1yGQMA" />
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FullGrader</title>
+<title>Regix Studio · Apps de Sergi Olivares</title>
+<meta name="description" content="Regix Studio es el estudio de Sergi Olivares, docente y desarrollador de apps en Mataró. Apps sencillas, útiles y respetuosas con tus datos, como FullGrader.">
+<meta name="theme-color" content="#fffffe">
+<link rel="canonical" href="https://rehgix.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Regix Studio">
+<meta property="og:title" content="Regix Studio · Apps de Sergi Olivares">
+<meta property="og:description" content="Apps sencillas, útiles y respetuosas con tus datos.">
+<meta property="og:url" content="https://rehgix.github.io/">
 <link rel="icon" href="favicon.ico" sizes="16x16 32x32">
 <link rel="icon" href="favicon-96.png" type="image/png" sizes="96x96">
 <link rel="icon" href="favicon-192.png" type="image/png" sizes="192x192">
-<link rel="canonical" href="https://fullgrader.app/">
-<meta http-equiv="refresh" content="0; url=https://fullgrader.app/">
+<link rel="apple-touch-icon" href="icon.png">
+<link rel="preload" href="fonts/unbounded-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-  body { font-family: system-ui, sans-serif; background: #fff; color: #1f2937; display: flex; min-height: 100vh; align-items: center; justify-content: center; margin: 0; padding: 16px; text-align: center; }
-  a { color: #4f46e5; }
+  @font-face { font-family: "Unbounded"; src: url("fonts/unbounded-latin.woff2") format("woff2"); font-weight: 200 900; font-display: swap; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: "Unbounded"; src: url("fonts/unbounded-latin-ext.woff2") format("woff2"); font-weight: 200 900; font-display: swap; unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: "Geist"; src: url("fonts/geist.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
+
+  :root {
+    color-scheme: light;
+    --bg: #fffffe;
+    --ink: #1e1b4b;
+    --muted: #57534e;
+    --soft: #6b6880;
+    --line: #ddd6fe;
+    --wash: #f5f3ff;
+    --wash2: #ede9fe;
+    --lila: #5b54e8;
+    --deep: #3730a3;
+    --violet: #8b5cf6;
+    --pale: #c4b5fd;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 400 17px/1.6 "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
+    min-height: 100vh; display: flex; flex-direction: column;
+  }
+  a { color: var(--lila); text-underline-offset: 3px; }
+  a:hover { color: var(--deep); }
+  .wrap { width: 100%; max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+
+  /* Barra superior */
+  header.top { border-bottom: 1px solid var(--wash2); }
+  header.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 68px; }
+  .brand { display: flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; font: 700 17px/1 "Unbounded", sans-serif; letter-spacing: -0.01em; }
+  .brand img { width: 32px; height: 32px; border-radius: 9px; }
+  .langs { display: flex; gap: 4px; }
+  .langs button {
+    font: 600 13px/1 "Geist", sans-serif; color: var(--soft); background: none;
+    border: 1px solid transparent; border-radius: 999px; padding: 8px 11px; cursor: pointer;
+  }
+  .langs button:hover { color: var(--lila); }
+  .langs button[aria-pressed="true"] { color: var(--lila); border-color: var(--line); background: var(--wash); }
+
+  /* Cabecera */
+  .hero { padding: 72px 0 56px; }
+  .eyebrow { display: inline-block; font: 600 13px/1 "Geist", sans-serif; letter-spacing: .08em; text-transform: uppercase; color: var(--lila); background: var(--wash); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; }
+  h1 {
+    font: 800 clamp(34px, 6.4vw, 66px)/1.05 "Unbounded", sans-serif; letter-spacing: -0.03em;
+    margin: 22px 0 20px; max-width: 15ch;
+  }
+  h1 em { font-style: normal; color: var(--lila); }
+  .lead { font-size: clamp(17px, 2vw, 20px); color: var(--muted); max-width: 46ch; margin: 0; }
+
+  /* Apps */
+  h2 { font: 700 clamp(22px, 3vw, 28px)/1.2 "Unbounded", sans-serif; letter-spacing: -0.02em; margin: 0 0 22px; }
+  .apps { padding: 8px 0 64px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 18px; }
+  .card {
+    border: 1px solid var(--line); border-radius: 22px; padding: 24px; background: var(--bg);
+    display: flex; flex-direction: column; gap: 14px;
+    transition: transform .25s ease, border-color .25s ease, background .25s ease;
+  }
+  .card.live:hover { transform: translateY(-4px); border-color: var(--pale); background: #fdfcff; }
+  .card .head { display: flex; align-items: center; gap: 14px; }
+  .card .icon { width: 64px; height: 64px; border-radius: 16px; flex: none; }
+  .card h3 { font: 700 20px/1.2 "Unbounded", sans-serif; margin: 0; letter-spacing: -0.01em; }
+  .tag { display: inline-block; margin-top: 6px; font: 600 12px/1 "Geist", sans-serif; color: #15803d; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 999px; padding: 5px 9px; }
+  .tag.soon { color: var(--soft); background: var(--wash); border-color: var(--line); }
+  .card p { margin: 0; color: var(--muted); font-size: 16px; }
+  .links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: auto; padding-top: 4px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px; text-decoration: none;
+    font: 600 15px/1 "Geist", sans-serif; border-radius: 999px; padding: 12px 16px;
+    border: 1px solid var(--line); color: var(--deep); background: var(--wash);
+  }
+  .btn:hover { border-color: var(--pale); color: var(--deep); background: var(--wash2); }
+  .btn.main { background: var(--lila); border-color: var(--lila); color: #fff; }
+  .btn.main:hover { background: var(--deep); border-color: var(--deep); color: #fff; }
+  .card.soon { border-style: dashed; background: var(--wash); justify-content: center; }
+  .card.soon .icon { background: var(--bg); border: 1px dashed var(--pale); display: grid; place-items: center; color: var(--pale); font: 700 28px/1 "Unbounded", sans-serif; }
+
+  /* Sobre mí */
+  .about { padding: 0 0 72px; }
+  .about .box { border: 1px solid var(--line); border-radius: 22px; padding: 28px; background: var(--wash); display: grid; gap: 22px; grid-template-columns: 1.4fr 1fr; }
+  .about p { margin: 0 0 12px; color: var(--muted); }
+  .about ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  .about li { display: flex; gap: 10px; align-items: baseline; }
+  .about li b { color: var(--lila); }
+  @media (max-width: 720px) { .about .box { grid-template-columns: 1fr; } }
+
+  footer { margin-top: auto; border-top: 1px solid var(--wash2); color: var(--soft); font-size: 14px; }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 20px; padding-top: 22px; padding-bottom: 28px; }
+
+  /* Entrada suave */
+  .rise { opacity: 0; transform: translateY(14px); animation: rise .7s cubic-bezier(.2,.7,.2,1) forwards; }
+  .d1 { animation-delay: .05s; } .d2 { animation-delay: .15s; } .d3 { animation-delay: .25s; } .d4 { animation-delay: .35s; }
+  @keyframes rise { to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .rise { animation: none; opacity: 1; transform: none; } .card { transition: none; } }
+  @media (max-width: 520px) {
+    .wrap { padding: 0 16px; }
+    .hero { padding: 48px 0 40px; }
+    .brand span { display: none; }
+    .langs button { padding: 8px 9px; }
+  }
 </style>
 </head>
 <body>
-  <p><strong>FullGrader</strong><br><a href="https://fullgrader.app/">fullgrader.app</a></p>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="./"><img src="favicon-192.png" alt="" width="32" height="32"><span>Regix Studio</span></a>
+    <nav class="langs" aria-label="Idioma">
+      <button type="button" data-set-lang="es" lang="es">ES</button>
+      <button type="button" data-set-lang="ca" lang="ca">CA</button>
+      <button type="button" data-set-lang="en" lang="en">EN</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <span class="eyebrow rise d1" data-i18n="eyebrow">Regix Studio · Sergi Olivares</span>
+      <h1 class="rise d2" data-i18n-html="title">Apps <em>sencillas</em> que respetan tus datos.</h1>
+      <p class="lead rise d3" data-i18n="lead">Soy docente y desarrollo apps pensadas para el día a día. Sin publicidad, sin cuentas innecesarias y con tus datos guardados en tu dispositivo.</p>
+    </div>
+  </section>
+
+  <section class="apps" aria-labelledby="apps-title">
+    <div class="wrap">
+      <h2 id="apps-title" data-i18n="appsTitle">Mis apps</h2>
+      <div class="grid">
+
+        <article class="card live rise d4">
+          <div class="head">
+            <img class="icon" src="apps/fullgrader.png" alt="" width="64" height="64">
+            <div>
+              <h3>FullGrader</h3>
+              <span class="tag" data-i18n="tagAndroid">Android · Google Play</span>
+            </div>
+          </div>
+          <p data-i18n="fgText">Corrige exámenes tipo test con la cámara del móvil. Imprime la hoja de respuestas, haz una foto y tienes la nota al instante. Los datos del alumnado nunca salen del móvil.</p>
+          <div class="links">
+            <a class="btn main" href="https://fullgrader.app/" data-i18n="fgWeb">Ver la web</a>
+            <a class="btn" href="https://play.google.com/store/apps/details?id=com.fullgrader.app" rel="noopener">Google Play</a>
+          </div>
+        </article>
+
+        <article class="card soon rise d4">
+          <div class="head">
+            <div class="icon" aria-hidden="true">+</div>
+            <div>
+              <h3 data-i18n="soonTitle">Más apps</h3>
+              <span class="tag soon" data-i18n="soonTag">Próximamente</span>
+            </div>
+          </div>
+          <p data-i18n="soonText">Estoy preparando nuevas apps pequeñas y útiles. Aparecerán aquí en cuanto estén listas.</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="about" aria-labelledby="about-title">
+    <div class="wrap">
+      <div class="box">
+        <div>
+          <h2 id="about-title" data-i18n="aboutTitle">Sobre mí</h2>
+          <p data-i18n="about1">Me llamo Sergi Olivares y soy profesor en Mataró (Barcelona). Regix Studio es el nombre con el que publico mis aplicaciones.</p>
+          <p data-i18n="about2">Hago las apps que me gustaría usar en clase y en casa: rápidas, claras y sin trucos.</p>
+        </div>
+        <ul>
+          <li><b>✉</b><span><span data-i18n="contact">Contacto:</span> <a href="mailto:regixstudio.dev@gmail.com">regixstudio.dev@gmail.com</a></span></li>
+          <li><b>⌂</b><span data-i18n="where">Mataró (Barcelona, España)</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Regix Studio · Sergi Olivares</span>
+    <span data-i18n="noCookies">Esta web no usa cookies ni estadísticas.</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var T = {
+    es: {
+      docTitle: "Regix Studio · Apps de Sergi Olivares",
+      eyebrow: "Regix Studio · Sergi Olivares",
+      title: "Apps <em>sencillas</em> que respetan tus datos.",
+      lead: "Soy docente y desarrollo apps pensadas para el día a día. Sin publicidad, sin cuentas innecesarias y con tus datos guardados en tu dispositivo.",
+      appsTitle: "Mis apps",
+      tagAndroid: "Android · Google Play",
+      fgText: "Corrige exámenes tipo test con la cámara del móvil. Imprime la hoja de respuestas, haz una foto y tienes la nota al instante. Los datos del alumnado nunca salen del móvil.",
+      fgWeb: "Ver la web",
+      soonTitle: "Más apps",
+      soonTag: "Próximamente",
+      soonText: "Estoy preparando nuevas apps pequeñas y útiles. Aparecerán aquí en cuanto estén listas.",
+      aboutTitle: "Sobre mí",
+      about1: "Me llamo Sergi Olivares y soy profesor en Mataró (Barcelona). Regix Studio es el nombre con el que publico mis aplicaciones.",
+      about2: "Hago las apps que me gustaría usar en clase y en casa: rápidas, claras y sin trucos.",
+      contact: "Contacto:",
+      where: "Mataró (Barcelona, España)",
+      noCookies: "Esta web no usa cookies ni estadísticas.",
+      langLabel: "Idioma"
+    },
+    ca: {
+      docTitle: "Regix Studio · Apps de Sergi Olivares",
+      eyebrow: "Regix Studio · Sergi Olivares",
+      title: "Apps <em>senzilles</em> que respecten les teves dades.",
+      lead: "Soc docent i desenvolupo apps pensades per al dia a dia. Sense publicitat, sense comptes innecessaris i amb les teves dades desades al teu dispositiu.",
+      appsTitle: "Les meves apps",
+      tagAndroid: "Android · Google Play",
+      fgText: "Corregeix exàmens tipus test amb la càmera del mòbil. Imprimeix el full de respostes, fes-hi una foto i tens la nota a l'instant. Les dades de l'alumnat no surten mai del mòbil.",
+      fgWeb: "Veure la web",
+      soonTitle: "Més apps",
+      soonTag: "Properament",
+      soonText: "Estic preparant noves apps petites i útils. Apareixeran aquí tan bon punt estiguin llestes.",
+      aboutTitle: "Sobre mi",
+      about1: "Em dic Sergi Olivares i soc professor a Mataró (Barcelona). Regix Studio és el nom amb què publico les meves aplicacions.",
+      about2: "Faig les apps que m'agradaria fer servir a classe i a casa: ràpides, clares i sense trucs.",
+      contact: "Contacte:",
+      where: "Mataró (Barcelona, Espanya)",
+      noCookies: "Aquesta web no fa servir galetes ni estadístiques.",
+      langLabel: "Idioma"
+    },
+    en: {
+      docTitle: "Regix Studio · Apps by Sergi Olivares",
+      eyebrow: "Regix Studio · Sergi Olivares",
+      title: "<em>Simple</em> apps that respect your data.",
+      lead: "I'm a teacher and I build apps for everyday use. No ads, no unnecessary accounts, and your data stays on your device.",
+      appsTitle: "My apps",
+      tagAndroid: "Android · Google Play",
+      fgText: "Grade multiple-choice tests with your phone camera. Print the answer sheet, take a photo and get the grade instantly. Student data never leaves the phone.",
+      fgWeb: "Visit the website",
+      soonTitle: "More apps",
+      soonTag: "Coming soon",
+      soonText: "I'm working on new small, useful apps. They'll appear here as soon as they're ready.",
+      aboutTitle: "About me",
+      about1: "My name is Sergi Olivares and I'm a teacher in Mataró (Barcelona, Spain). Regix Studio is the name I publish my apps under.",
+      about2: "I make the apps I'd like to use in class and at home: fast, clear and with no tricks.",
+      contact: "Contact:",
+      where: "Mataró (Barcelona, Spain)",
+      noCookies: "This website uses no cookies or analytics.",
+      langLabel: "Language"
+    }
+  };
+  var KEY = "regix-lang";
+  function pick() {
+    try { var s = localStorage.getItem(KEY); if (s && T[s]) return s; } catch (e) {}
+    var langs = navigator.languages || [navigator.language || "es"];
+    for (var i = 0; i < langs.length; i++) {
+      var c = String(langs[i]).toLowerCase().slice(0, 2);
+      if (c === "ca") return "ca";
+      if (c === "es" || c === "gl" || c === "eu") return "es";
+      if (T[c]) return c;
+    }
+    return "en";
+  }
+  function apply(l) {
+    var t = T[l];
+    document.documentElement.lang = l;
+    document.title = t.docTitle;
+    document.querySelectorAll("[data-i18n]").forEach(function (el) { el.textContent = t[el.getAttribute("data-i18n")]; });
+    document.querySelectorAll("[data-i18n-html]").forEach(function (el) { el.innerHTML = t[el.getAttribute("data-i18n-html")]; });
+    document.querySelector(".langs").setAttribute("aria-label", t.langLabel);
+    document.querySelectorAll("[data-set-lang]").forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-set-lang") === l ? "true" : "false"); });
+  }
+  document.querySelectorAll("[data-set-lang]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var l = b.getAttribute("data-set-lang");
+      try { localStorage.setItem(KEY, l); } catch (e) {}
+      apply(l);
+    });
+  });
+  document.getElementById("year").textContent = new Date().getFullYear();
+  apply(pick());
+})();
+</script>
 </body>
 </html>

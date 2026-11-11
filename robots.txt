@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://rehgix.github.io/sitemap.xml
